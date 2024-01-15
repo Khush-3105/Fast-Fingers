@@ -1,0 +1,73 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#home{
+    display: flex;
+    background-image: url('../assets/bg.jpg');
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 100vh;
+    align-items: center;
+    justify-content: center;
+}
+#home-container{
+    margin: auto;
+    padding: 20px;
+    display: flex;
+    width:fit-content;
+    color: white;
+    background-color: black;
+    border: 2px solid blue;
+    border-radius: 5px;
+    text-align: center;
+    justify-content: center;
+    flex-direction: column;
+    border-radius: 20px;
+    box-shadow: 3px 3px 8px  blue;
+}
+#home-namebox{
+    width: 250px;
+    height: 40px;
+    font-size: 20px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+}
+#home-namebox:hover{
+    border: 2px solid blue;
+}
+#home-selectdiff{
+    width: 250px;
+    height: 40px;
+    font-size: 18px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 5px;
+}
+#home-selectdiff:hover{
+    border: 2px solid blue;
+}
+#home-startbutton{
+    width: 150px;
+    height: 40px;
+    border-radius: 5px;
+    font-size: 20px;
+    margin: 10px;
+    background-color: blue;
+    font-weight: bolder;
+    color: white;
+    border: none;
+}
+#home-startbutton:hover{
+    border: 2px solid white;
+    cursor: pointer;
+    background-color: rgb(0, 0, 136);
+}
+
