@@ -108,6 +108,11 @@ body{
     font-size: 20px;
     font-weight: bold;
 }
+#playagainbutton:hover{
+    border: 2px solid white;
+    cursor: pointer;
+    background-color: rgb(0, 0, 136);
+}
 #quitgamebutton{
     width: 150px;
     background-color: blue;
@@ -116,7 +121,11 @@ body{
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
-
+}
+#quitgamebutton:hover{
+    border: 2px solid white;
+    cursor: pointer;
+    background-color: rgb(0, 0, 136);
 }
 #game-screenright{
     /* background-color: aqua; */
