@@ -33,6 +33,7 @@ function Game() {
   const [Word, setWord] = useState(initialWord);
   const [GameScoreArr, setGameScoreArr] = useState([]);
   const [UserInput, setUserInput] = useState("");
+  const [isButtonDisabled, setButtonDisabled] = useState(true);
 
   // ---Score Board---
 
@@ -68,6 +69,7 @@ function Game() {
     document.getElementById("wordinput").disabled = false;
     document.getElementById("wordinput").focus();
     document.getElementById("wordinput").value = "";
+    setButtonDisabled(true);
   }
 
   // ---Timer---
@@ -84,6 +86,7 @@ function Game() {
       document.getElementById("gameover").style.display = "flex";
       document.getElementById("timer").style.display = "none";
       document.getElementById("wordinput").disabled = true;
+      setButtonDisabled(false);
     };
 
     intervalId = setInterval(() => {
@@ -164,7 +167,11 @@ function Game() {
               onChange={(e) => handleInput(e.target.value)}
               autoFocus
             />
-            <button id="playagainbutton" onClick={handlePlayAgain}>
+            <button
+              id="playagainbutton"
+              disabled={isButtonDisabled}
+              onClick={handlePlayAgain}
+            >
               Play Again
             </button>
             <br />
