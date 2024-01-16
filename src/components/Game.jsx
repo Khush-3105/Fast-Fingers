@@ -1,13 +1,14 @@
-import "./Game.css";
+// Imports
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import "./Game.css";
 import Header from "./Header";
 import easyWords from "../assets/easyWords.json";
 import mediumWords from "../assets/mediumWords.json";
 import hardWords from "../assets/hardWords.json";
 
-import { useLocation, useNavigate } from "react-router-dom";
-
 function Game() {
+  //Setting inittial Time and Word based on difficulty
   const Data = useLocation();
   const difficulty = Data.state.diff;
   let initialTime;
@@ -23,36 +24,40 @@ function Game() {
     initialWord = hardWords[Math.floor(Math.random() * hardWords.length)];
   }
 
-  const navigate = useNavigate();
+  const navigate = useNavigate(); //Route between pages
 
+  // State variables
   const [Score, setScore] = useState(0);
-  const [Gamenum, setGamenum] = useState(1);
-  const [time, setTime] = useState(initialTime);
-  const [word, setword] = useState(initialWord);
+  const [GameNum, setGameNum] = useState(1);
+  const [Time, setTime] = useState(initialTime);
+  const [Word, setWord] = useState(initialWord);
   const [GameScoreArr, setGameScoreArr] = useState([]);
-  const [userInput, setUserInput] = useState("");
+  const [UserInput, setUserInput] = useState("");
 
   // ---Score Board---
 
+  //Rendering the list of scores
   const listItems = GameScoreArr.map((GameScoreArr, index) => (
     <li className="scoreboardlist" key={index}>
       Game {index + 1}: {GameScoreArr}
     </li>
   ));
 
+  // function to get a new word based on difficulty
   function newWord() {
     setUserInput("");
     if (difficulty === "Easy") {
-      setword(easyWords[Math.floor(Math.random() * easyWords.length)]);
+      setWord(easyWords[Math.floor(Math.random() * easyWords.length)]);
     } else if (difficulty == "Medium") {
-      setword(mediumWords[Math.floor(Math.random() * mediumWords.length)]);
+      setWord(mediumWords[Math.floor(Math.random() * mediumWords.length)]);
     } else {
-      setword(hardWords[Math.floor(Math.random() * hardWords.length)]);
+      setWord(hardWords[Math.floor(Math.random() * hardWords.length)]);
     }
   }
 
+  // function to handle play again
   function handlePlayAgain() {
-    setGamenum(Gamenum + 1);
+    setGameNum(GameNum + 1);
     document.getElementById("timer").style.display = "flex";
     document.getElementById("gameover").style.display = "none";
     setTime(initialTime);
@@ -63,6 +68,7 @@ function Game() {
     document.getElementById("wordinput").value = "";
   }
 
+  // ---Timer---
   useEffect(() => {
     let intervalId;
 
@@ -70,18 +76,17 @@ function Game() {
       setTime((prevTime) => Math.max(0, prevTime - 1));
     };
 
+    //function to handle Game Over
     const handleGameOver = () => {
-      // console.log(Score);
       setGameScoreArr((GameScoreArr) => [...GameScoreArr, Score]);
       document.getElementById("gameover").style.display = "flex";
       document.getElementById("timer").style.display = "none";
       document.getElementById("wordinput").disabled = true;
-      // document.getElementById("");
     };
 
     intervalId = setInterval(() => {
       decrementTime();
-      if (time === 0) {
+      if (Time === 0) {
         clearInterval(intervalId);
         handleGameOver();
       }
@@ -90,16 +95,17 @@ function Game() {
     return () => {
       clearInterval(intervalId);
     };
-  }, [time, Score]); // Include time as a dependency
+  }, [Time]); // Include time as a dependency
 
   const formatTime = (seconds) => {
     const remainingSeconds = seconds % 60;
     return `${remainingSeconds < 10 ? "0" : ""}${remainingSeconds} s`;
   };
 
+  //function for handling user input
   function handleInput(input) {
     setUserInput(input);
-    if (input === word) {
+    if (input === Word) {
       newWord();
       setTime(initialTime);
       setScore(Score + 1);
@@ -107,12 +113,12 @@ function Game() {
     }
   }
 
+  //function to change the word color and compare with user input
   const getLetterClass = (letter, index) => {
     let colorStatus = 0;
-    if (index <= userInput.length - 1) {
-      colorStatus = letter === userInput[index].toLowerCase() ? 1 : -1;
+    if (index <= UserInput.length - 1) {
+      colorStatus = letter === UserInput[index].toLowerCase() ? 1 : -1;
     }
-
     let letterClass = "";
     switch (colorStatus) {
       case 1:
@@ -125,7 +131,6 @@ function Game() {
         letterClass = "";
         break;
     }
-
     return letterClass;
   };
 
@@ -137,13 +142,13 @@ function Game() {
         </div>
         <div className="game-screen">
           <div id="game-screenleft">
-            <div id="gamenumber">Game {Gamenum}</div>
-            <div id="timer">{formatTime(time)}</div>
+            <div id="gamenumber">Game {GameNum}</div>
+            <div id="timer">{formatTime(Time)}</div>
             <div id="gameover">Game Over Score: {Score}</div>
             <br />
             <div id="gameword">
               {" "}
-              {word.split("").map((letter, index) => {
+              {Word.split("").map((letter, index) => {
                 const letterClass = getLetterClass(letter, index);
                 return (
                   <h1 key={index} className={`gameword_letter ${letterClass}`}>
