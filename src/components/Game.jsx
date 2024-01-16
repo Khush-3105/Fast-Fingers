@@ -18,10 +18,10 @@ function Game() {
     initialTime = initialWord.length;
   } else if (difficulty === "Medium") {
     initialWord = mediumWords[Math.floor(Math.random() * mediumWords.length)];
-    initialTime = Math.ceil(initialWord.length / 1.5);
+    initialTime = Math.floor(initialWord.length / 1.5);
   } else if (difficulty === "Hard") {
     initialWord = hardWords[Math.floor(Math.random() * hardWords.length)];
-    initialTime = Math.ceil(initialWord.length / 2);
+    initialTime = Math.floor(initialWord.length / 2);
   }
 
   const navigate = useNavigate(); //Route between pages
@@ -48,14 +48,17 @@ function Game() {
   function newWord() {
     setUserInput("");
     if (difficulty === "Easy") {
-      setWord(easyWords[Math.floor(Math.random() * easyWords.length)]);
-      setTime(Word.length);
+      let temp = easyWords[Math.floor(Math.random() * easyWords.length)];
+      setWord(temp);
+      setTime(temp.length);
     } else if (difficulty === "Medium") {
-      setWord(mediumWords[Math.floor(Math.random() * mediumWords.length)]);
-      setTime(Math.ceil(Word.length / 1.5));
+      let temp = mediumWords[Math.floor(Math.random() * mediumWords.length)];
+      setWord(temp);
+      setTime(Math.floor(temp.length / 1.5));
     } else if (difficulty === "Hard") {
-      setWord(hardWords[Math.floor(Math.random() * hardWords.length)]);
-      setTime(Math.ceil(Word.length / 2));
+      let temp = hardWords[Math.floor(Math.random() * hardWords.length)];
+      setWord(temp);
+      setTime(Math.floor(temp.length / 2));
     }
   }
 
@@ -76,10 +79,6 @@ function Game() {
   useEffect(() => {
     let intervalId;
 
-    const decrementTime = () => {
-      setTime((prevTime) => Math.max(0, prevTime - 1));
-    };
-
     //function to handle Game Over
     const handleGameOver = () => {
       setGameScoreArr((GameScoreArr) => [...GameScoreArr, Score]);
@@ -90,10 +89,11 @@ function Game() {
     };
 
     intervalId = setInterval(() => {
-      decrementTime();
       if (Time === 0) {
         clearInterval(intervalId);
         handleGameOver();
+      } else {
+        setTime(Time - 1);
       }
     }, 1000);
 
@@ -102,17 +102,11 @@ function Game() {
     };
   }, [Time]); // Include time as a dependency
 
-  const formatTime = (seconds) => {
-    const remainingSeconds = seconds % 60;
-    return `${remainingSeconds < 10 ? "0" : ""}${remainingSeconds} s`;
-  };
-
   //function for handling user input
   function handleInput(input) {
     setUserInput(input);
     if (input === Word) {
       newWord();
-      setTime(initialTime);
       setScore(Score + 1);
       document.getElementById("wordinput").value = "";
     }
@@ -148,7 +142,7 @@ function Game() {
         <div className="game-screen">
           <div id="game-screenleft">
             <div id="gamenumber">Game {GameNum}</div>
-            <div id="timer">{formatTime(Time)}</div>
+            <div id="timer">0{Time}</div>
             <div id="gameover">Game Over Score: {Score}</div>
             <br />
             <div id="gameword">
