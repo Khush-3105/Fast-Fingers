@@ -14,14 +14,14 @@ function Game() {
   let initialTime;
   let initialWord;
   if (difficulty === "Easy") {
-    initialTime = 2;
     initialWord = easyWords[Math.floor(Math.random() * easyWords.length)];
+    initialTime = initialWord.length;
   } else if (difficulty === "Medium") {
-    initialTime = 4;
     initialWord = mediumWords[Math.floor(Math.random() * mediumWords.length)];
+    initialTime = Math.ceil(initialWord.length / 1.5);
   } else if (difficulty === "Hard") {
-    initialTime = 7;
     initialWord = hardWords[Math.floor(Math.random() * hardWords.length)];
+    initialTime = Math.ceil(initialWord.length / 2);
   }
 
   const navigate = useNavigate(); //Route between pages
@@ -48,10 +48,13 @@ function Game() {
     setUserInput("");
     if (difficulty === "Easy") {
       setWord(easyWords[Math.floor(Math.random() * easyWords.length)]);
-    } else if (difficulty == "Medium") {
+      setTime(Word.length);
+    } else if (difficulty === "Medium") {
       setWord(mediumWords[Math.floor(Math.random() * mediumWords.length)]);
-    } else {
+      setTime(Math.ceil(Word.length / 1.5));
+    } else if (difficulty === "Hard") {
       setWord(hardWords[Math.floor(Math.random() * hardWords.length)]);
+      setTime(Math.ceil(Word.length / 2));
     }
   }
 
@@ -60,7 +63,6 @@ function Game() {
     setGameNum(GameNum + 1);
     document.getElementById("timer").style.display = "flex";
     document.getElementById("gameover").style.display = "none";
-    setTime(initialTime);
     newWord();
     setScore(0);
     document.getElementById("wordinput").disabled = false;
