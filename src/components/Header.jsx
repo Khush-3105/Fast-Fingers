@@ -46,7 +46,7 @@ function Header(props) {
             height="30px"
             color="white"
           />
-          Score:{props.score}
+          Score: {props.score}
         </div>
       </div>
     </>
