@@ -78,21 +78,18 @@ function Game() {
     wordInputRef.current.value = "";
     setButtonDisabled(true);
   }
+  //function to handle Game Over
+  const handleGameOver = () => {
+    setGameScoreArr((gameScoreArr) => [...gameScoreArr, score]);
+    gameOverRef.current.style.display = "flex";
+    timerRef.current.style.display = "none";
+    wordInputRef.current.disabled = true;
+    setButtonDisabled(false);
+  };
 
   // ---Timer---
   useEffect(() => {
-    let intervalId;
-
-    //function to handle Game Over
-    const handleGameOver = () => {
-      setGameScoreArr((gameScoreArr) => [...gameScoreArr, score]);
-      gameOverRef.current.style.display = "flex";
-      timerRef.current.style.display = "none";
-      wordInputRef.current.disabled = true;
-      setButtonDisabled(false);
-    };
-
-    intervalId = setInterval(() => {
+    let intervalId = setInterval(() => {
       if (time === 0) {
         clearInterval(intervalId);
         handleGameOver();
