@@ -10,16 +10,10 @@ import hardWords from "../assets/hardWords.json";
 function Game() {
   //Setting inittial Time and Word based on difficulty
   const Data = useLocation();
-  const difficulty = Data.state.diff;
-  const initialDiffFactor = {
-    Easy: 1,
-    Medium: 1.5,
-    Hard: 2,
-  };
+  const difficulty = Number(Data.state.diff);
 
-  const { selectedWord: initialWord, selectedTime: initialTime } = selectWord(
-    initialDiffFactor[difficulty]
-  );
+  const { selectedWord: initialWord, selectedTime: initialTime } =
+    selectWord(difficulty);
 
   const navigate = useNavigate(); //Route between pages
 
@@ -32,7 +26,7 @@ function Game() {
   const [gameNum, setGameNum] = useState(1);
   const [time, setTime] = useState(initialTime);
   const [word, setWord] = useState(initialWord);
-  const [diffFactor, setDiffFactor] = useState(initialDiffFactor[difficulty]);
+  const [diffFactor, setDiffFactor] = useState(difficulty);
   const [gameScoreArr, setGameScoreArr] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(true);
@@ -88,7 +82,6 @@ function Game() {
     setGameNum(gameNum + 1);
     timerRef.current.style.display = "flex";
     gameOverRef.current.style.display = "none";
-    setDiffFactor(initialDiffFactor);
     newWord();
     setScore(0);
     wordInputRef.current.disabled = false;
@@ -102,6 +95,7 @@ function Game() {
     gameOverRef.current.style.display = "flex";
     timerRef.current.style.display = "none";
     wordInputRef.current.disabled = true;
+    setDiffFactor(difficulty);
     setButtonDisabled(false);
   };
 
@@ -126,7 +120,7 @@ function Game() {
     setUserInput(input);
     if (input === word) {
       newWord();
-      setDiffFactor(diffFactor + 0.1);
+      setDiffFactor(diffFactor + 0.01);
       setScore(score + 1);
       wordInputRef.current.value = "";
     }
@@ -156,7 +150,7 @@ function Game() {
   return (
     <>
       <div id="game">
-        <Header score={score} />
+        <Header score={score} name={Data.state.name} diff={diffFactor} />
         <div className="game__screen">
           <div id="game__screen__left">
             <div id="game__screen__left__gamenumber">Game {gameNum}</div>

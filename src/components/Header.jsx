@@ -2,11 +2,9 @@ import LogoImg from "../assets/logo1.png";
 import Userimg from "../assets/user.png";
 import Levelimg from "../assets/gamelevel.png";
 import Scoreimg from "../assets/score.png";
-import { useLocation } from "react-router-dom";
 import "./Header.css";
 
 function Header(props) {
-  const Data = useLocation();
   return (
     <>
       <div className="game__header">
@@ -18,7 +16,7 @@ function Header(props) {
               height="30px"
               color="white"
             />
-            {Data.state.name}
+            {props.name}
             <br />
             <img
               src={Levelimg}
@@ -26,7 +24,12 @@ function Header(props) {
               height="30px"
               color="white"
             />
-            {Data.state.diff} Level
+            {props.diff >= 1 && props.diff < 1.5
+              ? "Easy"
+              : props.diff >= 1.5 && props.diff < 2
+              ? "Medium"
+              : "Hard"}{" "}
+            Level
           </div>
         </div>
         <div id="game__headerright">

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [Name, setName] = useState("");
-  const [Difficulty, setDifficulty] = useState("Easy");
+  const [Difficulty, setDifficulty] = useState(1);
   const navigate = useNavigate();
 
   function handleStartButtonClick() {
@@ -37,9 +37,9 @@ function Home() {
               id="home__container__selectdiff"
               onChange={(e) => setDifficulty(e.target.value)}
             >
-              <option value="Easy">Easy Level</option>
-              <option value="Medium">Medium Level</option>
-              <option value="Hard">Hard Level</option>
+              <option value="1">Easy Level</option>
+              <option value="1.5">Medium Level</option>
+              <option value="2">Hard Level</option>
             </select>
             <br />
             <button
