@@ -9,20 +9,8 @@ body {
   display: flex;
   flex-direction: column;
 }
-.game-header {
-  font-weight: 900;
-  color: white;
-  background-color: black;
-  display: flex;
-  align-items: center;
-  justify-content: space-evenly;
-  padding: 10px;
-  font-size: 30px;
-  border-bottom: 3px solid white;
-  box-shadow: 0px 3px 5px blue;
-}
 
-.game-screen {
+.game__screen {
   padding: 30px;
 
   display: flex;
@@ -30,7 +18,7 @@ body {
   justify-content: center;
 }
 
-#game-screenleft {
+#game__screen__left {
   /* background-color: green; */
   display: flex;
   align-items: center;
@@ -42,13 +30,13 @@ body {
   align-items: center;
 }
 
-#gamenumber {
+#game__screen__left__gamenumber {
   font-size: 30px;
   padding-bottom: 10px;
   font-weight: 900;
   border-bottom: 2px solid blue;
 }
-#timer {
+#game__screen__left__timer {
   background-image: url("../assets/timer.png");
   background-size: contain;
   display: flex;
@@ -60,7 +48,7 @@ body {
   font-weight: 900;
   font-size: 40px;
 }
-#gameover {
+#game__screen__left__gameover {
   display: none;
   height: 200px;
   width: 200px;
@@ -70,23 +58,22 @@ body {
   font-weight: 900;
   font-size: 40px;
 }
-#gameword {
+#game__screen__left__gameword {
   font-size: 30px;
   font-family: "Arial", sans-serif;
   font-weight: 900;
   display: flex;
 }
-.gameword_letter {
+.gameword__letter {
   color: white;
 }
-.gameword_letter-correct {
+.gameword__letter--correct {
   color: green;
 }
-
-.gameword_letter-wrong {
+.gameword__letter--wrong {
   color: red;
 }
-#wordinput {
+#game__screen__left__wordinput {
   height: 40px;
   width: 300px;
   margin: 20px;
@@ -97,7 +84,7 @@ body {
   font-size: 20px;
   text-align: center;
 }
-#playagainbutton {
+#game__screen__left__playagainbutton {
   width: 150px;
   background-color: blue;
   color: white;
@@ -106,18 +93,18 @@ body {
   font-size: 20px;
   font-weight: bold;
 }
-#playagainbutton:hover {
+#game__screen__left__playagainbutton:hover {
   border: 2px solid white;
   cursor: pointer;
   background-color: rgb(0, 0, 136);
 }
-#playagainbutton:disabled,
+#game__screen__left__playagainbutton:disabled,
 button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
 }
-#quitgamebutton {
+#game__screen__left__quitgamebutton {
   width: 150px;
   background-color: blue;
   color: white;
@@ -126,12 +113,12 @@ button[disabled] {
   font-size: 20px;
   font-weight: bold;
 }
-#quitgamebutton:hover {
+#game__screen__left__quitgamebutton:hover {
   border: 2px solid white;
   cursor: pointer;
   background-color: rgb(0, 0, 136);
 }
-#game-screenright {
+#game__screen__right {
   /* background-color: aqua; */
   display: flex;
   height: max-content;
@@ -139,7 +126,7 @@ button[disabled] {
   align-items: center;
   justify-content: center;
 }
-#scoreboard {
+#game__screen__right__scoreboard {
   align-items: center;
   border: 2px solid blue;
   border-radius: 10px;
@@ -153,7 +140,7 @@ button[disabled] {
   min-height: 300px;
 }
 
-.scoreboardlist {
+.game__screen__right__scoreboardlist {
   font-size: 20px;
   margin: 5px;
   margin-left: 20%;
@@ -162,13 +149,7 @@ button[disabled] {
   text-align: left;
 }
 @media (max-width: 600px) {
-  .game-screen {
+  .game__screen {
     flex-direction: column;
-  }
-}
-@media (max-width: 400px) {
-  .game-header {
-    flex-direction: column;
-    /* align-items: center; */
   }
 }

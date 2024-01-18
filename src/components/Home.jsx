@@ -19,22 +19,22 @@ function Home() {
   return (
     <>
       <div id="home">
-        <div id="home-container">
-          <div id="home-logoimage">
+        <div id="home__container">
+          <div id="home__container__logoimage">
             <img src={LogoImg} height="100px" alt="logo" />
             <h1>Fastest Fingers</h1>
           </div>
           <br />
           <hr />
-          <div id="home-inputbox">
+          <div id="home__container__inputbox">
             <input
-              id="home-namebox"
+              id="home__container__namebox"
               placeholder="Enter Your Name"
               onChange={(e) => setName(e.target.value)}
             />
             <br />
             <select
-              id="home-selectdiff"
+              id="home__container__selectdiff"
               onChange={(e) => setDifficulty(e.target.value)}
             >
               <option value="Easy">Easy Level</option>
@@ -42,7 +42,10 @@ function Home() {
               <option value="Hard">Hard Level</option>
             </select>
             <br />
-            <button id="home-startbutton" onClick={handleStartButtonClick}>
+            <button
+              id="home__container__startbutton"
+              onClick={handleStartButtonClick}
+            >
               Start Game
             </button>
           </div>

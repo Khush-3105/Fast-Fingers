@@ -9,44 +9,44 @@ function Header(props) {
   const Data = useLocation();
   return (
     <>
-      <div id="game-headerleft">
-        <div className="headerbox">
-          <img
-            src={Userimg}
-            className="headerimg"
-            height="30px"
-            color="white"
-          />
-          {Data.state.name}
+      <div className="game__header">
+        <div id="game__headerleft">
+          <div className="headerbox">
+            <img
+              src={Userimg}
+              className="headerimg"
+              height="30px"
+              color="white"
+            />
+            {Data.state.name}
+            <br />
+            <img
+              src={Levelimg}
+              className="headerimg"
+              height="30px"
+              color="white"
+            />
+            {Data.state.diff} Level
+          </div>
         </div>
-        <div className="headerbox">
-          <img
-            src={Levelimg}
-            className="headerimg"
-            height="30px"
-            color="white"
-          />
-          {Data.state.diff} Level
-        </div>
-      </div>
-      <div id="game-headerright">
-        <div className="headerbox">
-          <img
-            src={LogoImg}
-            className="headerimg"
-            height="30px"
-            color="white"
-          />
-          Fast Fingers
-        </div>
-        <div className="headerbox">
-          <img
-            src={Scoreimg}
-            className="headerimg"
-            height="30px"
-            color="white"
-          />
-          Score: {props.score}
+        <div id="game__headerright">
+          <div className="headerbox">
+            <img
+              src={LogoImg}
+              className="headerimg"
+              height="30px"
+              color="white"
+            />
+            Fast Fingers
+            <br />
+            <img
+              src={Scoreimg}
+              className="headerimg"
+              height="30px"
+              color="white"
+            />
+            Score: {props.score}
+          </div>
         </div>
       </div>
     </>

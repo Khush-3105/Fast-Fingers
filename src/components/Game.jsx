@@ -1,6 +1,6 @@
 // Imports
 import { useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import "./Game.css";
 import Header from "./Header";
 import easyWords from "../assets/easyWords.json";
@@ -26,21 +26,25 @@ function Game() {
 
   const navigate = useNavigate(); //Route between pages
 
+  const timerRef = useRef(null);
+  const wordInputRef = useRef(null);
+  const gameOverRef = useRef(null);
+
   // State variables
-  const [Score, setScore] = useState(0);
-  const [GameNum, setGameNum] = useState(1);
-  const [Time, setTime] = useState(initialTime);
-  const [Word, setWord] = useState(initialWord);
-  const [GameScoreArr, setGameScoreArr] = useState([]);
-  const [UserInput, setUserInput] = useState("");
+  const [score, setScore] = useState(0);
+  const [gameNum, setGameNum] = useState(1);
+  const [time, setTime] = useState(initialTime);
+  const [word, setWord] = useState(initialWord);
+  const [gameScoreArr, setGameScoreArr] = useState([]);
+  const [userInput, setUserInput] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(true);
 
   // ---Score Board---
 
   //Rendering the list of scores
-  const listItems = GameScoreArr.map((GameScoreArr, index) => (
-    <li className="scoreboardlist" key={index}>
-      Game {index + 1}: {GameScoreArr}
+  const listItems = gameScoreArr.map((gameScoreArr, index) => (
+    <li className="game__screen__right__scoreboardlist" key={index}>
+      Game {index + 1}: {gameScoreArr}
     </li>
   ));
 
@@ -64,14 +68,14 @@ function Game() {
 
   // function to handle play again
   function handlePlayAgain() {
-    setGameNum(GameNum + 1);
-    document.getElementById("timer").style.display = "flex";
-    document.getElementById("gameover").style.display = "none";
+    setGameNum(gameNum + 1);
+    timerRef.current.style.display = "flex";
+    gameOverRef.current.style.display = "none";
     newWord();
     setScore(0);
-    document.getElementById("wordinput").disabled = false;
-    document.getElementById("wordinput").focus();
-    document.getElementById("wordinput").value = "";
+    wordInputRef.current.disabled = false;
+    wordInputRef.current.focus();
+    wordInputRef.current.value = "";
     setButtonDisabled(true);
   }
 
@@ -81,50 +85,50 @@ function Game() {
 
     //function to handle Game Over
     const handleGameOver = () => {
-      setGameScoreArr((GameScoreArr) => [...GameScoreArr, Score]);
-      document.getElementById("gameover").style.display = "flex";
-      document.getElementById("timer").style.display = "none";
-      document.getElementById("wordinput").disabled = true;
+      setGameScoreArr((gameScoreArr) => [...gameScoreArr, score]);
+      gameOverRef.current.style.display = "flex";
+      timerRef.current.style.display = "none";
+      wordInputRef.current.disabled = true;
       setButtonDisabled(false);
     };
 
     intervalId = setInterval(() => {
-      if (Time === 0) {
+      if (time === 0) {
         clearInterval(intervalId);
         handleGameOver();
       } else {
-        setTime(Time - 1);
+        setTime(time - 1);
       }
     }, 1000);
 
     return () => {
       clearInterval(intervalId);
     };
-  }, [Time]); // Include time as a dependency
+  }, [time]); // Include time as a dependency
 
   //function for handling user input
   function handleInput(input) {
     setUserInput(input);
-    if (input === Word) {
+    if (input === word) {
       newWord();
-      setScore(Score + 1);
-      document.getElementById("wordinput").value = "";
+      setScore(score + 1);
+      wordInputRef.current.value = "";
     }
   }
 
   //function to change the word color and compare with user input
   const getLetterClass = (letter, index) => {
     let colorStatus = 0;
-    if (index <= UserInput.length - 1) {
-      colorStatus = letter === UserInput[index].toLowerCase() ? 1 : -1;
+    if (index <= userInput.length - 1) {
+      colorStatus = letter === userInput[index].toLowerCase() ? 1 : -1;
     }
     let letterClass = "";
     switch (colorStatus) {
       case 1:
-        letterClass = "gameword_letter-correct";
+        letterClass = "--correct";
         break;
       case -1:
-        letterClass = "gameword_letter-wrong";
+        letterClass = "--wrong";
         break;
       default:
         letterClass = "";
@@ -136,33 +140,36 @@ function Game() {
   return (
     <>
       <div id="game">
-        <div className="game-header">
-          <Header score={Score} />
-        </div>
-        <div className="game-screen">
-          <div id="game-screenleft">
-            <div id="gamenumber">Game {GameNum}</div>
-            <div id="timer">0{Time}</div>
-            <div id="gameover">Game Over Score: {Score}</div>
+        <Header score={score} />
+        <div className="game__screen">
+          <div id="game__screen__left">
+            <div id="game__screen__left__gamenumber">Game {gameNum}</div>
+            <div id="game__screen__left__timer" ref={timerRef}>
+              0{time}
+            </div>
+            <div id="game__screen__left__gameover" ref={gameOverRef}>
+              Game Over Score: {score}
+            </div>
             <br />
-            <div id="gameword">
+            <div id="game__screen__left__gameword">
               {" "}
-              {Word.split("").map((letter, index) => {
+              {word.split("").map((letter, index) => {
                 const letterClass = getLetterClass(letter, index);
                 return (
-                  <h1 key={index} className={`gameword_letter ${letterClass}`}>
+                  <h1 key={index} className={`gameword__letter${letterClass}`}>
                     {letter}
                   </h1>
                 );
               })}
             </div>
             <input
-              id="wordinput"
+              id="game__screen__left__wordinput"
+              ref={wordInputRef}
               onChange={(e) => handleInput(e.target.value)}
               autoFocus
             />
             <button
-              id="playagainbutton"
+              id="game__screen__left__playagainbutton"
               disabled={isButtonDisabled}
               onClick={handlePlayAgain}
             >
@@ -170,7 +177,7 @@ function Game() {
             </button>
             <br />
             <button
-              id="quitgamebutton"
+              id="game__screen__left__quitgamebutton"
               onClick={() => {
                 navigate("/");
               }}
@@ -178,8 +185,8 @@ function Game() {
               Quit Game
             </button>
           </div>
-          <div id="game-screenright">
-            <div id="scoreboard">
+          <div id="game__screen__right">
+            <div id="game__screen__right__scoreboard">
               <h2>Score Board</h2>
               <hr />
               <br />
