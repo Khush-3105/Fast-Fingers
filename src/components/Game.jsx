@@ -11,18 +11,15 @@ function Game() {
   //Setting inittial Time and Word based on difficulty
   const Data = useLocation();
   const difficulty = Data.state.diff;
-  let initialTime;
-  let initialWord;
-  if (difficulty === "Easy") {
-    initialWord = easyWords[Math.floor(Math.random() * easyWords.length)];
-    initialTime = initialWord.length;
-  } else if (difficulty === "Medium") {
-    initialWord = mediumWords[Math.floor(Math.random() * mediumWords.length)];
-    initialTime = Math.floor(initialWord.length / 1.5);
-  } else if (difficulty === "Hard") {
-    initialWord = hardWords[Math.floor(Math.random() * hardWords.length)];
-    initialTime = Math.floor(initialWord.length / 2);
-  }
+  const initialDiffFactor = {
+    Easy: 1,
+    Medium: 1.5,
+    Hard: 2,
+  };
+
+  const { selectedWord: initialWord, selectedTime: initialTime } = selectWord(
+    initialDiffFactor[difficulty]
+  );
 
   const navigate = useNavigate(); //Route between pages
 
@@ -35,6 +32,7 @@ function Game() {
   const [gameNum, setGameNum] = useState(1);
   const [time, setTime] = useState(initialTime);
   const [word, setWord] = useState(initialWord);
+  const [diffFactor, setDiffFactor] = useState(initialDiffFactor[difficulty]);
   const [gameScoreArr, setGameScoreArr] = useState([]);
   const [userInput, setUserInput] = useState("");
   const [isButtonDisabled, setButtonDisabled] = useState(true);
@@ -48,22 +46,41 @@ function Game() {
     </li>
   ));
 
+  function selectWord(diffFactor) {
+    const words = {
+      1: easyWords,
+      1.5: mediumWords,
+      2: hardWords,
+    };
+
+    const roundedDiffFactor =
+      diffFactor >= 1 && diffFactor < 1.5
+        ? 1
+        : diffFactor >= 1.5 && diffFactor < 2
+        ? 1.5
+        : 2;
+
+    const selectedWord =
+      words[roundedDiffFactor][
+        Math.floor(Math.random() * words[roundedDiffFactor].length)
+      ];
+    const selectedTime =
+      roundedDiffFactor === 1
+        ? selectedWord.length
+        : roundedDiffFactor === 1.5
+        ? Math.floor(selectedWord.length / 1.5)
+        : Math.floor(selectedWord.length / 2);
+
+    return { selectedWord, selectedTime };
+  }
+
   // function to get a new word based on difficulty
   function newWord() {
     setUserInput("");
-    if (difficulty === "Easy") {
-      let temp = easyWords[Math.floor(Math.random() * easyWords.length)];
-      setWord(temp);
-      setTime(temp.length);
-    } else if (difficulty === "Medium") {
-      let temp = mediumWords[Math.floor(Math.random() * mediumWords.length)];
-      setWord(temp);
-      setTime(Math.floor(temp.length / 1.5));
-    } else if (difficulty === "Hard") {
-      let temp = hardWords[Math.floor(Math.random() * hardWords.length)];
-      setWord(temp);
-      setTime(Math.floor(temp.length / 2));
-    }
+    const { selectedWord, selectedTime } = selectWord(diffFactor);
+    console.log(selectedWord, selectedTime, diffFactor);
+    setWord(selectedWord);
+    setTime(selectedTime);
   }
 
   // function to handle play again
@@ -71,6 +88,7 @@ function Game() {
     setGameNum(gameNum + 1);
     timerRef.current.style.display = "flex";
     gameOverRef.current.style.display = "none";
+    setDiffFactor(initialDiffFactor);
     newWord();
     setScore(0);
     wordInputRef.current.disabled = false;
@@ -80,7 +98,7 @@ function Game() {
   }
   //function to handle Game Over
   const handleGameOver = () => {
-    setGameScoreArr((gameScoreArr) => [...gameScoreArr, score]);
+    setGameScoreArr((prevGameScoreArr) => [...prevGameScoreArr, score]);
     gameOverRef.current.style.display = "flex";
     timerRef.current.style.display = "none";
     wordInputRef.current.disabled = true;
@@ -108,6 +126,7 @@ function Game() {
     setUserInput(input);
     if (input === word) {
       newWord();
+      setDiffFactor(diffFactor + 0.1);
       setScore(score + 1);
       wordInputRef.current.value = "";
     }
@@ -149,7 +168,6 @@ function Game() {
             </div>
             <br />
             <div id="game__screen__left__gameword">
-              {" "}
               {word.split("").map((letter, index) => {
                 const letterClass = getLetterClass(letter, index);
                 return (
