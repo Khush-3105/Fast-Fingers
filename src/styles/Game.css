@@ -38,17 +38,34 @@ body {
   border-bottom: 2px solid blue;
 }
 #game__screen__left__timer {
-  background-image: url("../assets/timer.png");
-  background-size: contain;
   display: flex;
-  height: 200px;
+  flex-direction: column;
   width: 200px;
-  padding-top: 20px;
   align-items: center;
   justify-content: center;
   font-weight: 900;
   font-size: 40px;
 }
+#game__screen__left__timer__time {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url("../assets/timer.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  height: 150px;
+  padding-top: 20px;
+
+  width: 150px;
+}
+#game__screen__left__timer__progressbar {
+  width: 100%;
+}
+
+progress::-webkit-progress-value {
+  background: blue;
+}
+
 #game__screen__left__gameover {
   display: none;
   height: 200px;

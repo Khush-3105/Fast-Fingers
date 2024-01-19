@@ -44,7 +44,12 @@ function Game() {
           <div id="game__screen__left">
             <div id="game__screen__left__gamenumber">Game {gameNum}</div>
             <div id="game__screen__left__timer" ref={timerRef}>
-              0{time}
+              <div id="game__screen__left__timer__time">0{time}</div>
+              <progress
+                id="game__screen__left__timer__progressbar"
+                value={time}
+                max={word.length}
+              />
             </div>
             <div id="game__screen__left__gameover" ref={gameOverRef}>
               <div id="game__screen__left__gameover__text">Game Over</div>
@@ -52,7 +57,6 @@ function Game() {
               <br />
               Words: {scoreWordCount}
             </div>
-            <br />
             <div id="game__screen__left__gameword">
               {word.split("").map((letter, index) => {
                 const letterClass = getLetterClass(letter, index, userInput);
