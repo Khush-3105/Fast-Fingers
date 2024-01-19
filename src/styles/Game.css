@@ -92,7 +92,7 @@ progress::-webkit-progress-value {
   color: white;
 }
 .gameword__letter--correct {
-  color: green;
+  color: rgb(20, 216, 20);
 }
 .gameword__letter--wrong {
   color: red;
