@@ -25,7 +25,7 @@
 }
 
 @media (max-width: 450px) {
-  .game__header {
+  .game__header__userdetails {
     flex-direction: column;
   }
   .headerbox {
