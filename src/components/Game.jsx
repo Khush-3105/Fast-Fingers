@@ -22,7 +22,8 @@ function Game() {
   const gameOverRef = useRef(null);
 
   // State variables
-  const [score, setScore] = useState(0);
+  const [scoreWordCount, setScoreWordCount] = useState(0);
+  const [scoreTime, setScoreTime] = useState(0);
   const [gameNum, setGameNum] = useState(1);
   const [time, setTime] = useState(initialTime);
   const [word, setWord] = useState(initialWord);
@@ -36,10 +37,12 @@ function Game() {
   //Rendering the list of scores
   const listItems = gameScoreArr.map((gameScoreArr, index) => (
     <li className="game__screen__right__scoreboardlist" key={index}>
-      Game {index + 1}: {gameScoreArr}
+      <h5>Game {index + 1}</h5>
+      Score: {gameScoreArr.score} | Words: {gameScoreArr.wordCount}
     </li>
   ));
 
+  //function to select word based on diff Factor
   function selectWord(diffFactor) {
     const words = {
       1: easyWords,
@@ -72,7 +75,6 @@ function Game() {
   function newWord() {
     setUserInput("");
     const { selectedWord, selectedTime } = selectWord(diffFactor);
-    console.log(selectedWord, selectedTime, diffFactor);
     setWord(selectedWord);
     setTime(selectedTime);
   }
@@ -83,7 +85,8 @@ function Game() {
     timerRef.current.style.display = "flex";
     gameOverRef.current.style.display = "none";
     newWord();
-    setScore(0);
+    setScoreWordCount(0);
+    setScoreTime(0);
     wordInputRef.current.disabled = false;
     wordInputRef.current.focus();
     wordInputRef.current.value = "";
@@ -91,7 +94,12 @@ function Game() {
   }
   //function to handle Game Over
   const handleGameOver = () => {
-    setGameScoreArr((prevGameScoreArr) => [...prevGameScoreArr, score]);
+    setGameScoreArr((prevGameScoreArr) => [
+      ...prevGameScoreArr,
+      { score: scoreTime, wordCount: scoreWordCount },
+    ]);
+    console.log(gameScoreArr);
+
     gameOverRef.current.style.display = "flex";
     timerRef.current.style.display = "none";
     wordInputRef.current.disabled = true;
@@ -107,6 +115,7 @@ function Game() {
         handleGameOver();
       } else {
         setTime(time - 1);
+        setScoreTime(scoreTime + 1);
       }
     }, 1000);
 
@@ -121,7 +130,7 @@ function Game() {
     if (input === word) {
       newWord();
       setDiffFactor(diffFactor + 0.01);
-      setScore(score + 1);
+      setScoreWordCount(scoreWordCount + 1);
       wordInputRef.current.value = "";
     }
   }
@@ -150,7 +159,12 @@ function Game() {
   return (
     <>
       <div id="game">
-        <Header score={score} name={Data.state.name} diff={diffFactor} />
+        <Header
+          scoreTime={scoreTime}
+          scoreWordCount={scoreWordCount}
+          name={Data.state.name}
+          diff={diffFactor}
+        />
         <div className="game__screen">
           <div id="game__screen__left">
             <div id="game__screen__left__gamenumber">Game {gameNum}</div>
@@ -158,7 +172,10 @@ function Game() {
               0{time}
             </div>
             <div id="game__screen__left__gameover" ref={gameOverRef}>
-              Game Over Score: {score}
+              <div id="game__screen__left__gameover__text">Game Over</div>
+              Score: {scoreTime} s
+              <br />
+              Words: {scoreWordCount}
             </div>
             <br />
             <div id="game__screen__left__gameword">

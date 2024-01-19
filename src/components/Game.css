@@ -11,11 +11,12 @@ body {
 }
 
 .game__screen {
-  padding: 30px;
+  padding: 20px;
 
   display: flex;
   flex-direction: row;
   justify-content: center;
+  gap: 100px;
 }
 
 #game__screen__left {
@@ -55,7 +56,12 @@ body {
   padding-top: 20px;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   font-weight: 900;
+  font-size: 30px;
+}
+#game__screen__left__gameover__text {
+  color: red;
   font-size: 40px;
 }
 #game__screen__left__gameword {
@@ -64,6 +70,7 @@ body {
   font-weight: 900;
   display: flex;
 }
+
 .gameword__letter {
   color: white;
 }
@@ -134,7 +141,7 @@ button[disabled] {
   color: white;
   padding: 10px;
   background-color: black;
-  width: 200px;
+  width: 250px;
   height: auto;
   box-shadow: 3px 3px 6px blue;
   min-height: 300px;
@@ -143,13 +150,18 @@ button[disabled] {
 .game__screen__right__scoreboardlist {
   font-size: 20px;
   margin: 5px;
-  margin-left: 20%;
   margin-bottom: 10px;
   list-style-type: none;
-  text-align: left;
+  text-align: center;
 }
-@media (max-width: 600px) {
+@media (max-width: 630px) {
   .game__screen {
     flex-direction: column;
+    gap: 0px;
+  }
+}
+@media (max-width: 700px) {
+  .game__screen {
+    gap: 0px;
   }
 }

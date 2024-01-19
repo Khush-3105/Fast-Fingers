@@ -8,7 +8,16 @@ function Header(props) {
   return (
     <>
       <div className="game__header">
-        <div id="game__headerleft">
+        <div>
+          <img
+            src={LogoImg}
+            className="headerimg"
+            height="30px"
+            color="white"
+          />
+          Fast Fingers
+        </div>
+        <div id="game__header__userdetails">
           <div className="headerbox">
             <img
               src={Userimg}
@@ -31,16 +40,15 @@ function Header(props) {
               : "Hard"}{" "}
             Level
           </div>
-        </div>
-        <div id="game__headerright">
+
           <div className="headerbox">
             <img
-              src={LogoImg}
+              src={Scoreimg}
               className="headerimg"
               height="30px"
               color="white"
             />
-            Fast Fingers
+            Score: {props.scoreTime} s
             <br />
             <img
               src={Scoreimg}
@@ -48,7 +56,7 @@ function Header(props) {
               height="30px"
               color="white"
             />
-            Score: {props.score}
+            Words: {props.scoreWordCount}
           </div>
         </div>
       </div>
