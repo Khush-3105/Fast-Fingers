@@ -2,6 +2,7 @@ import LogoImg from "../assets/logo1.png";
 import Userimg from "../assets/user.png";
 import Levelimg from "../assets/gamelevel.png";
 import Scoreimg from "../assets/score.png";
+import Wordimg from "../assets/word.png";
 import "../styles/Header.css";
 
 function Header(props: {
@@ -56,7 +57,7 @@ function Header(props: {
             Score: {props.scoreTime} s
             <br />
             <img
-              src={Scoreimg}
+              src={Wordimg}
               className="headerimg"
               height="30px"
               color="white"
