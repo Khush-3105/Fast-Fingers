@@ -105,6 +105,10 @@ body {
   cursor: pointer;
   background-color: rgb(0, 0, 136);
 }
+#game__screen__left__playagainbutton:active {
+  transform: scale(0.9);
+}
+
 #game__screen__left__playagainbutton:disabled,
 button[disabled] {
   border: 1px solid #999999;
@@ -124,6 +128,9 @@ button[disabled] {
   border: 2px solid white;
   cursor: pointer;
   background-color: rgb(0, 0, 136);
+}
+#game__screen__left__quitgamebutton:active {
+  transform: scale(0.9);
 }
 #game__screen__right {
   /* background-color: aqua; */

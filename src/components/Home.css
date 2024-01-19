@@ -70,3 +70,6 @@
   cursor: pointer;
   background-color: rgb(0, 0, 136);
 }
+#home__container__startbutton:active {
+  transform: scale(0.9);
+}

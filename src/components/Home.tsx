@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 
 function Home() {
   const [Name, setName] = useState("");
-  const [Difficulty, setDifficulty] = useState(1);
+  const [Difficulty, setDifficulty] = useState("1");
   const navigate = useNavigate();
 
   function handleStartButtonClick() {

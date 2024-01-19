@@ -2,7 +2,7 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import "./Game.css";
-import Header from "./Header";
+import Header from "./Header.tsx";
 import easyWords from "../assets/easyWords.json";
 import mediumWords from "../assets/mediumWords.json";
 import hardWords from "../assets/hardWords.json";
@@ -10,27 +10,30 @@ import hardWords from "../assets/hardWords.json";
 function Game() {
   //Setting inittial Time and Word based on difficulty
   const Data = useLocation();
-  const difficulty = Number(Data.state.diff);
+  const difficulty: number = Number(Data.state.diff);
 
   const { selectedWord: initialWord, selectedTime: initialTime } =
     selectWord(difficulty);
 
   const navigate = useNavigate(); //Route between pages
 
-  const timerRef = useRef(null);
-  const wordInputRef = useRef(null);
-  const gameOverRef = useRef(null);
+  const timerRef = useRef<HTMLDivElement>(null);
+  const wordInputRef = useRef<HTMLInputElement>(null);
+  const gameOverRef = useRef<HTMLDivElement>(null);
 
   // State variables
-  const [scoreWordCount, setScoreWordCount] = useState(0);
-  const [scoreTime, setScoreTime] = useState(0);
-  const [gameNum, setGameNum] = useState(1);
-  const [time, setTime] = useState(initialTime);
-  const [word, setWord] = useState(initialWord);
-  const [diffFactor, setDiffFactor] = useState(difficulty);
-  const [gameScoreArr, setGameScoreArr] = useState([]);
-  const [userInput, setUserInput] = useState("");
-  const [isButtonDisabled, setButtonDisabled] = useState(true);
+  const [scoreWordCount, setScoreWordCount] = useState<number>(0);
+  const [scoreTime, setScoreTime] = useState<number>(0);
+  const [gameNum, setGameNum] = useState<number>(1);
+  const [time, setTime] = useState<number>(initialTime);
+  const [word, setWord] = useState<string>(initialWord);
+  const [diffFactor, setDiffFactor] = useState<number>(difficulty);
+  const [gameScoreArr, setGameScoreArr] = useState<Array<{
+    score: number,
+    wordCount: number
+    }>>([]);
+  const [userInput, setUserInput] = useState<string>("");
+  const [isButtonDisabled, setButtonDisabled] = useState<boolean>(true);
 
   // ---Score Board---
 
@@ -43,7 +46,7 @@ function Game() {
   ));
 
   //function to select word based on diff Factor
-  function selectWord(diffFactor) {
+  function selectWord(diffFactor:number) {
     const words = {
       1: easyWords,
       1.5: mediumWords,
@@ -82,17 +85,17 @@ function Game() {
   // function to handle play again
   function handlePlayAgain() {
     setGameNum(gameNum + 1);
-    timerRef.current.style.display = "flex";
-    gameOverRef.current.style.display = "none";
+    timerRef.current!.style.display = "flex";
+    gameOverRef.current!.style.display = "none";
     newWord();
     setScoreWordCount(0);
     setScoreTime(0);
-    wordInputRef.current.disabled = false;
-    wordInputRef.current.focus();
-    wordInputRef.current.value = "";
+    wordInputRef.current!.disabled = false;
+    wordInputRef.current?.focus();
+    wordInputRef.current!.value = "";
     setButtonDisabled(true);
   }
-  //function to handle Game Over
+  //function to handle Gme Over
   const handleGameOver = () => {
     setGameScoreArr((prevGameScoreArr) => [
       ...prevGameScoreArr,
@@ -100,9 +103,9 @@ function Game() {
     ]);
     console.log(gameScoreArr);
 
-    gameOverRef.current.style.display = "flex";
-    timerRef.current.style.display = "none";
-    wordInputRef.current.disabled = true;
+    gameOverRef.current!.style.display = "flex";
+    timerRef.current!.style.display = "none";
+    wordInputRef.current!.disabled = true;
     setDiffFactor(difficulty);
     setButtonDisabled(false);
   };
@@ -125,18 +128,18 @@ function Game() {
   }, [time]); // Include time as a dependency
 
   //function for handling user input
-  function handleInput(input) {
+  function handleInput(input:string) {
     setUserInput(input);
     if (input === word) {
       newWord();
       setDiffFactor(diffFactor + 0.01);
       setScoreWordCount(scoreWordCount + 1);
-      wordInputRef.current.value = "";
+      wordInputRef.current!.value = "";
     }
   }
 
   //function to change the word color and compare with user input
-  const getLetterClass = (letter, index) => {
+  const getLetterClass = (letter:string, index:number) => {
     let colorStatus = 0;
     if (index <= userInput.length - 1) {
       colorStatus = letter === userInput[index].toLowerCase() ? 1 : -1;

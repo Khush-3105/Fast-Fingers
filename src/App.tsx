@@ -1,6 +1,6 @@
-import Home from "./components/Home.jsx";
+import Home from "./components/Home.tsx";
 import "./App.css";
-import Game from "./components/Game.jsx";
+import Game from "./components/Game.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App;
+export default App

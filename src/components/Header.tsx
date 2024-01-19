@@ -4,7 +4,7 @@ import Levelimg from "../assets/gamelevel.png";
 import Scoreimg from "../assets/score.png";
 import "./Header.css";
 
-function Header(props) {
+function Header(props:{name:string, diff:number,scoreTime:number,scoreWordCount:number}) {
   return (
     <>
       <div className="game__header">
