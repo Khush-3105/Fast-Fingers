@@ -1,5 +1,5 @@
 import Home from "./components/Home.tsx";
-import "./App.css";
+import "./styles/App.css";
 import Game from "./components/Game.tsx";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
@@ -15,4 +15,4 @@ function App() {
   );
 }
 
-export default App
+export default App;

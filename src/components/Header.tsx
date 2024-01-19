@@ -2,9 +2,14 @@ import LogoImg from "../assets/logo1.png";
 import Userimg from "../assets/user.png";
 import Levelimg from "../assets/gamelevel.png";
 import Scoreimg from "../assets/score.png";
-import "./Header.css";
+import "../styles/Header.css";
 
-function Header(props:{name:string, diff:number,scoreTime:number,scoreWordCount:number}) {
+function Header(props: {
+  name: string;
+  diff: number;
+  scoreTime: number;
+  scoreWordCount: number;
+}) {
   return (
     <>
       <div className="game__header">
