@@ -24,7 +24,7 @@
   margin-right: 5px;
 }
 
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .game__header {
     flex-direction: column;
   }
