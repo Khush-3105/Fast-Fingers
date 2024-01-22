@@ -1,30 +1,26 @@
-import easyWords from "../assets/easyWords.json";
-import mediumWords from "../assets/mediumWords.json";
-import hardWords from "../assets/hardWords.json";
+import dictWords from "../assets/dictionary.json";
+
 export default function selectWord(diffFactor: number) {
-  const words = {
-    1: easyWords,
-    1.5: mediumWords,
-    2: hardWords,
-  };
+  function random(min:number, max:number) {
+    return Math.floor(Math.random() * (max - min + 1));
+  }
 
-  const roundedDiffFactor =
-    diffFactor >= 1 && diffFactor < 1.5
-      ? 1
-      : diffFactor >= 1.5 && diffFactor < 2
-      ? 1.5
-      : 2;
+  const dictonary = dictWords.filter((word) => {
+    if (diffFactor >= 1 && diffFactor < 1.5) {
+      return word.length <= 4;
+    } else if (diffFactor >= 1.5 && diffFactor < 2) {
+      return word.length > 4 && word.length <= 8;
+    } else {
+      return word.length > 8;
+    }
+  });
+  const selectedWord = dictonary[random(0, dictonary.length - 1)];
 
-  const selectedWord =
-    words[roundedDiffFactor][
-      Math.floor(Math.random() * words[roundedDiffFactor].length)
-    ];
   const selectedTime =
-    roundedDiffFactor === 1
+    diffFactor >= 1 && diffFactor < 1.5
       ? selectedWord.length
-      : roundedDiffFactor === 1.5
+      : diffFactor >= 1.5 && diffFactor < 2
       ? Math.floor(selectedWord.length / 1.5)
       : Math.floor(selectedWord.length / 2);
-
   return { selectedWord, selectedTime };
 }
