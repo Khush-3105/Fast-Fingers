@@ -69,6 +69,7 @@ function Game() {
             </div>
             <input
               id="game__screen__left__wordinput"
+              type="text"
               ref={wordInputRef}
               onChange={(e) => handleInput(e.target.value)}
               autoFocus

@@ -20,6 +20,7 @@ function Header(props: {
             className="headerimg"
             height="30px"
             color="white"
+            alt="logo"
           />
           Fast Fingers
         </div>
@@ -30,6 +31,7 @@ function Header(props: {
               className="headerimg"
               height="30px"
               color="white"
+              alt="user"
             />
             {props.name}
             <br />
@@ -38,6 +40,7 @@ function Header(props: {
               className="headerimg"
               height="30px"
               color="white"
+              alt="level"
             />
             {props.diff >= 1 && props.diff < 1.5
               ? "Easy"
@@ -51,6 +54,7 @@ function Header(props: {
             <img
               src={Scoreimg}
               className="headerimg"
+              alt="score"
               height="30px"
               color="white"
             />

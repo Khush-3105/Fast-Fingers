@@ -22,7 +22,7 @@ function Home() {
         <div id="home__container">
           <div id="home__container__logoimage">
             <img src={LogoImg} height="100px" alt="logo" />
-            <h1>Fastest Fingers</h1>
+            <h1>Fast Fingers</h1>
           </div>
           <br />
           <hr />
