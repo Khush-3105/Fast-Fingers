@@ -2,34 +2,74 @@ import { useLocation, useNavigate } from "react-router-dom";
 import "../styles/Game.css";
 import Header from "./Header.tsx";
 import useGame from "../services/useGame.tsx";
+import ScoreBoard from "./ScoreBoard.tsx";
 import getLetterClass from "../services/getLetterClass.tsx";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 function Game() {
   const navigate = useNavigate();
   const Data = useLocation();
   const difficulty: number = Number(Data.state.diff);
 
-  //Route between pages
-
   const timerRef = useRef<HTMLDivElement>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
   const gameOverRef = useRef<HTMLDivElement>(null);
 
+  const [gameNum, setGameNum] = useState<number>(1);
+  const [userInput, setUserInput] = useState<string>("");
+  const [isButtonDisabled, setButtonDisabled] = useState<boolean>(true);
+  const [gameScoreArr, setGameScoreArr] = useState<
+    Array<{
+      score: number;
+      wordCount: number;
+    }>
+  >([]);
   const {
     time,
     word,
-    listItems,
-    gameNum,
-    userInput,
-    isButtonDisabled,
+    diffFactor,
     scoreTime,
     scoreWordCount,
-    diffFactor,
+    newWord,
+    gameRestart,
+  } = useGame({
+    difficulty,
+    handleGameOver,
+  });
 
-    handlePlayAgain,
-    handleInput,
-  } = useGame(timerRef, wordInputRef, gameOverRef, difficulty);
+  function handleGameOver() {
+    setGameScoreArr((prevGameScoreArr) => [
+      ...prevGameScoreArr,
+      { score: scoreTime, wordCount: scoreWordCount },
+    ]);
+    gameOverRef.current!.style.display = "flex";
+    timerRef.current!.style.display = "none";
+    wordInputRef.current!.disabled = true;
+    wordInputRef.current!.value = "";
+    setButtonDisabled(false);
+  }
+
+  function handlePlayAgain() {
+    setGameNum(gameNum + 1);
+    timerRef.current!.style.display = "flex";
+    gameOverRef.current!.style.display = "none";
+    wordInputRef.current!.disabled = false;
+    wordInputRef.current?.focus();
+    setButtonDisabled(true);
+    console.log(diffFactor, difficulty);
+    setUserInput("");
+    gameRestart();
+    newWord();
+  }
+
+  function handleInput(input: string) {
+    setUserInput(input);
+    if (input === word) {
+      setUserInput("");
+      wordInputRef.current!.value = "";
+      newWord();
+    }
+  }
 
   return (
     <>
@@ -92,12 +132,7 @@ function Game() {
             </button>
           </div>
           <div id="game__screen__right">
-            <div id="game__screen__right__scoreboard">
-              <h2>Score Board</h2>
-              <hr />
-              <br />
-              <ul>{listItems}</ul>
-            </div>
+            <ScoreBoard gameScoreArr={gameScoreArr} />
           </div>
         </div>
       </div>
