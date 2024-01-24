@@ -1,17 +1,25 @@
 import Home from "./components/Home.tsx";
 import "./styles/App.css";
 import Game from "./components/Game.tsx";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import {
+
+  MemoryRouter,
+  Navigate,
+  Route,
+  Routes,
+} from "react-router-dom";
 
 function App() {
   return (
-    <BrowserRouter>
+    // <AuthProvider>
+    <MemoryRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="*" element={<Home />} />
+        <Route path="/game" element={<Game />} />{" "}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
-    </BrowserRouter>
+    </MemoryRouter>
+    // </AuthProvider>
   );
 }
 
