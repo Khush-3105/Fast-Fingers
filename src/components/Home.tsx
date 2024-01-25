@@ -4,15 +4,18 @@ import LogoImg from "../assets/logo1.png";
 import { useNavigate } from "react-router-dom";
 
 function Home() {
-  const [Name, setName] = useState("");
-  const [Difficulty, setDifficulty] = useState("1");
+  const [name, setName] = useState("");
+  const [difficulty, setDifficulty] = useState("1");
   const navigate = useNavigate();
 
   function handleStartButtonClick() {
-    if (!Name) {
+    if (!name) {
       alert("Please enter your name.");
     } else {
-      navigate("/game", { state: { name: Name, diff: Difficulty } });
+      sessionStorage.setItem("gameStarted", "true");
+      navigate("/game", {
+        state: { name: name, diff: difficulty },
+      });
     }
   }
 

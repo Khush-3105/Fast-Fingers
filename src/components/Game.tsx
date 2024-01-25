@@ -9,7 +9,8 @@ import { useEffect, useRef, useState } from "react";
 function Game() {
   const navigate = useNavigate();
   const Data = useLocation();
-  const difficulty: number = Number(Data.state.diff);
+
+  const difficulty: number = Number(Data.state.diff) || 1;
 
   const timerRef = useRef<HTMLDivElement>(null);
   const wordInputRef = useRef<HTMLInputElement>(null);
@@ -35,14 +36,13 @@ function Game() {
     gameRestart,
   } = useGame({
     difficulty,
-
   });
 
-  useEffect(()=>{
-  if(gameOver){
-    handleGameOver();
-  }
-  },[gameOver]);
+  useEffect(() => {
+    if (gameOver) {
+      handleGameOver();
+    }
+  }, [gameOver]);
 
   function handleGameOver() {
     setGameScoreArr((prevGameScoreArr) => [
