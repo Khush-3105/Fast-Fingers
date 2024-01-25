@@ -128,7 +128,6 @@ function Game() {
             >
               Play Again
             </button>
-            <br />
             <button
               id="game__screen__left__quitgamebutton"
               onClick={() => {

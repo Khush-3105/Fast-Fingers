@@ -1,18 +1,20 @@
 .game__header {
   font-weight: 900;
   color: white;
-  background-color: black;
+  background-color: #08013d;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 10px;
   font-size: 30px;
-  border-bottom: 3px solid white;
-  box-shadow: 0px 3px 5px blue;
+  border-bottom: 3px solid #f37900;
+  box-shadow: 0px 3px 5px #f37900;
 }
 #game__header__userdetails {
   display: flex;
   width: 100%;
+  border-top: 2px dashed #f37900;
+  margin-top: 10px;
   flex-direction: row;
   justify-content: space-evenly;
 }

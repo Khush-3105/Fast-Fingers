@@ -2,7 +2,7 @@ body {
   background-color: black;
 }
 #game {
-  background-image: url("../assets/bg.jpg");
+  background-image: url("../assets/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -35,7 +35,7 @@ body {
   font-size: 30px;
   padding-bottom: 10px;
   font-weight: 900;
-  border-bottom: 2px solid blue;
+  border-bottom: 2px solid #f37900;
 }
 #game__screen__left__timer {
   display: flex;
@@ -63,7 +63,7 @@ body {
 }
 
 progress::-webkit-progress-value {
-  background: blue;
+  background: #f37900;
 }
 
 #game__screen__left__gameover {
@@ -82,7 +82,7 @@ progress::-webkit-progress-value {
   font-size: 40px;
 }
 #game__screen__left__gameword {
-  font-size: 30px;
+  font-size: 25px;
   font-family: "Arial", sans-serif;
   font-weight: 900;
   display: flex;
@@ -110,17 +110,18 @@ progress::-webkit-progress-value {
 }
 #game__screen__left__playagainbutton {
   width: 150px;
-  background-color: blue;
+  background-color: #f37900;
   color: white;
   height: 40px;
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
+  margin-bottom: 5px;;
 }
 #game__screen__left__playagainbutton:hover {
   border: 2px solid white;
   cursor: pointer;
-  background-color: rgb(0, 0, 136);
+  background-color: #af5904;
 }
 #game__screen__left__playagainbutton:active {
   transform: scale(0.9);
@@ -134,7 +135,7 @@ button[disabled] {
 }
 #game__screen__left__quitgamebutton {
   width: 150px;
-  background-color: blue;
+  background-color: #f37900;
   color: white;
   height: 40px;
   border-radius: 10px;
@@ -144,7 +145,7 @@ button[disabled] {
 #game__screen__left__quitgamebutton:hover {
   border: 2px solid white;
   cursor: pointer;
-  background-color: rgb(0, 0, 136);
+  background-color: #af5904;
 }
 #game__screen__left__quitgamebutton:active {
   transform: scale(0.9);
@@ -159,15 +160,15 @@ button[disabled] {
 }
 #game__screen__right__scoreboard {
   align-items: center;
-  border: 2px solid blue;
+  border: 2px solid #f37900;
   border-radius: 10px;
   text-align: center;
   color: white;
   padding: 10px;
-  background-color: black;
+  background-color: #08013d;
   width: 250px;
   height: auto;
-  box-shadow: 3px 3px 6px blue;
+  box-shadow: 3px 3px 6px #f37900;
   min-height: 300px;
 }
 

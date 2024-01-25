@@ -6,7 +6,7 @@
 
 #home {
   display: flex;
-  background-image: url("../assets/bg.jpg");
+  background-image: url("../assets/bg.png");
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -20,14 +20,14 @@
   display: flex;
   width: fit-content;
   color: white;
-  background-color: black;
-  border: 2px solid blue;
+  background-color: #08013d;
+  border: 2px solid #f37900;
   border-radius: 5px;
   text-align: center;
   justify-content: center;
   flex-direction: column;
   border-radius: 20px;
-  box-shadow: 3px 3px 8px blue;
+  box-shadow: 3px 3px 8px #f37900;
 }
 #home__container__namebox {
   width: 250px;
@@ -40,19 +40,19 @@
   margin-top: 15px;
 }
 #home__container__namebox:hover {
-  border: 2px solid blue;
+  border: 2px solid #f37900;
 }
 #home__container__selectdiff {
   width: 250px;
   height: 40px;
-  font-size: 18px;
-  padding: 10px;
+  font-size: 16px;
+  padding: 5px;
   margin: 10px;
   border: none;
   border-radius: 5px;
 }
 #home__container__selectdiff:hover {
-  border: 2px solid blue;
+  border: 2px solid #f37900;
 }
 #home__container__startbutton {
   width: 150px;
@@ -60,7 +60,7 @@
   border-radius: 5px;
   font-size: 20px;
   margin: 10px;
-  background-color: blue;
+  background-color: #f37900;
   font-weight: bolder;
   color: white;
   border: none;
@@ -68,7 +68,7 @@
 #home__container__startbutton:hover {
   border: 2px solid white;
   cursor: pointer;
-  background-color: rgb(0, 0, 136);
+  background-color: #af5904;
 }
 #home__container__startbutton:active {
   transform: scale(0.9);
