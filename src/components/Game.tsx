@@ -65,8 +65,8 @@ function Game() {
     setButtonDisabled(true);
     console.log(diffFactor, difficulty);
     setUserInput("");
-    gameRestart();
     newWord();
+    gameRestart();
   }
 
   function handleInput(input: string) {
