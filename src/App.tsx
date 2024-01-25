@@ -1,17 +1,10 @@
 import Home from "./components/Home.tsx";
 import "./styles/App.css";
 import Game from "./components/Game.tsx";
-import {
-
-  MemoryRouter,
-  Navigate,
-  Route,
-  Routes,
-} from "react-router-dom";
+import { MemoryRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
-    // <AuthProvider>
     <MemoryRouter>
       <Routes>
         <Route path="/" element={<Home />} />
@@ -19,7 +12,6 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </MemoryRouter>
-    // </AuthProvider>
   );
 }
 

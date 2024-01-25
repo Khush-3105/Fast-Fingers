@@ -4,7 +4,7 @@ import Header from "./Header.tsx";
 import useGame from "../services/useGame.tsx";
 import ScoreBoard from "./ScoreBoard.tsx";
 import getLetterClass from "../services/getLetterClass.tsx";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 function Game() {
   const navigate = useNavigate();
@@ -30,12 +30,19 @@ function Game() {
     diffFactor,
     scoreTime,
     scoreWordCount,
+    gameOver,
     newWord,
     gameRestart,
   } = useGame({
     difficulty,
-    handleGameOver,
+
   });
+
+  useEffect(()=>{
+  if(gameOver){
+    handleGameOver();
+  }
+  },[gameOver]);
 
   function handleGameOver() {
     setGameScoreArr((prevGameScoreArr) => [

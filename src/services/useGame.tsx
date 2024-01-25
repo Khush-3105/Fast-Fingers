@@ -3,10 +3,9 @@ import selectWord from "./selectWord.tsx";
 
 interface GameHookProps {
   difficulty: number;
-  handleGameOver: () => void;
 }
 
-function useGame({ difficulty, handleGameOver }: GameHookProps) {
+function useGame({ difficulty }: GameHookProps) {
   const { selectedWord: initialWord, selectedTime: initialTime } =
     selectWord(difficulty);
 
@@ -15,12 +14,13 @@ function useGame({ difficulty, handleGameOver }: GameHookProps) {
   const [diffFactor, setDiffFactor] = useState<number>(difficulty);
   const [scoreTime, setScoreTime] = useState<number>(0);
   const [scoreWordCount, setScoreWordCount] = useState<number>(0);
+  const [gameOver, setGameOver]=useState<boolean>(false);
 
   useEffect(() => {
     let intervalId = setInterval(() => {
       if (time === 0) {
         setDiffFactor(difficulty);
-        handleGameOver();
+        setGameOver(true);
         clearInterval(intervalId);
       } else {
         setTime((prevTime) => prevTime - 1);
@@ -44,6 +44,7 @@ function useGame({ difficulty, handleGameOver }: GameHookProps) {
   function gameRestart() {
     setScoreWordCount(0);
     setScoreTime(0);
+    setGameOver(false);
   }
 
   return {
@@ -52,6 +53,7 @@ function useGame({ difficulty, handleGameOver }: GameHookProps) {
     diffFactor,
     scoreTime,
     scoreWordCount,
+    gameOver,
     newWord,
     gameRestart,
   };
