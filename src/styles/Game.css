@@ -6,6 +6,7 @@ body {
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 }
@@ -116,7 +117,7 @@ progress::-webkit-progress-value {
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
-  margin-bottom: 5px;;
+  margin-bottom: 5px;
 }
 #game__screen__left__playagainbutton:hover {
   border: 2px solid white;
