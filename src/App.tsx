@@ -1,18 +1,11 @@
-import Home from "./components/Home.tsx";
-import "./styles/App.css";
+import { useState } from "react";
+import "./App.css";
+import { Home } from "./components/home/Home.tsx";
 import Game from "./components/Game.tsx";
-import { BrowserRouter, Navigate, Route, Routes } from "react-router-dom";
 
 function App() {
-  return (
-    <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/game" element={<Game />} />
-        <Route path="*" element={<Navigate to="/" />} />
-      </Routes>
-    </BrowserRouter>
-  );
+  const [gameDetails, setgameDetails] = useState({ name: "", difficulty: "1" });
+  return <Home setgameDetails={setgameDetails}/>;
 }
 
 export default App;
