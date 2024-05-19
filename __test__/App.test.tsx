@@ -1,7 +1,7 @@
 import { render, fireEvent, screen } from "@testing-library/react";
 import "@testing-library/jest-dom";
 import App from "../src/App";
-import Game from "../src/components/Game";
+import Game from "../src/components/game/Game";
 import { MemoryRouter } from "react-router-dom";
 
 // Mock useNavigate

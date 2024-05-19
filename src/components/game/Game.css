@@ -1,0 +1,136 @@
+.game__wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  padding: 20px;
+}
+
+.game {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  color: white;
+  flex: 0;
+}
+
+/*GAME ROUND*/
+
+.game__round {
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: 900;
+  border-bottom: 3px solid var(--highlight--color);
+}
+
+/*GAME TIMER*/
+
+.game__timer {
+  width: 200px;
+}
+.timer__time {
+  background-image: url("../../assets/timer.png");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 150px;
+  width: 100%;
+  padding-top: 25%;
+  font-size: 60px;
+  font-weight: 900;
+  text-align: center;
+}
+.timer__bar {
+  font-size: 40px;
+  width: 100%;
+}
+
+/*GAME SCORE*/
+
+.game__score {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
+  height: 190px;
+  width: 200px;
+  font-weight: 900;
+  font-size: 30px;
+}
+.game__score span {
+  color: red;
+  font-size: 40px;
+}
+
+/*GAME WORD*/
+
+.game__word {
+  font-size: 25px;
+  font-family: "Arial", sans-serif;
+  font-weight: 900;
+  display: flex;
+}
+
+.word__letter {
+  color: white;
+}
+.word__letter--correct {
+  color: rgb(20, 216, 20);
+}
+.word__letter--wrong {
+  color: red;
+}
+
+/*GAME INPUT*/
+
+.game__input {
+  height: 40px;
+  width: 300px;
+  margin: 20px;
+  border-radius: 10px;
+  border: none;
+  color: black;
+  padding: 5px;
+  font-size: 20px;
+  text-align: center;
+}
+
+/*GAME BUTTONS*/
+
+.game__button {
+  width: 150px;
+  background-color: var(--highlight--color);
+  color: white;
+  height: 40px;
+  border-radius: 10px;
+  font-size: 20px;
+  font-weight: bold;
+  margin: 5px;
+}
+.game__button:hover {
+  border: 2px solid white;
+  cursor: pointer;
+  background-color: #af5904;
+}
+.game__button:active {
+  transform: scale(0.9);
+}
+
+.game__button:disabled,
+button[disabled] {
+  border: 1px solid #999999;
+  background-color: #cccccc;
+  color: #666666;
+  pointer-events:none;
+}
+
+@media (max-width: 640px) {
+  .game__wrapper {
+    height: calc(100% - 154px);
+    overflow-y: auto;
+    flex-direction: column;
+    gap: 0px;
+  }
+}

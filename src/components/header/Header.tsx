@@ -1,15 +1,17 @@
-import LogoImg from "../assets/logo1.png";
-import Userimg from "../assets/user.png";
-import Levelimg from "../assets/gamelevel.png";
-import Scoreimg from "../assets/score.png";
-import Wordimg from "../assets/word.png";
-import "../styles/Header.css";
+import LogoImg from "../../assets/logo1.png";
+import Userimg from "../../assets/user.png";
+import Levelimg from "../../assets/gamelevel.png";
+import Scoreimg from "../../assets/score.png";
+import Wordimg from "../../assets/word.png";
+import "./Header.css";
 
 function Header(props: {
   name: string;
   diff: number;
-  scoreTime: number;
-  scoreWordCount: number;
+  score: {
+    time: number;
+    wordCount: number;
+  };
 }) {
   return (
     <>
@@ -58,7 +60,7 @@ function Header(props: {
               height="30px"
               color="white"
             />
-            Score: {props.scoreTime} s
+            Score: {props.score.time} s
             <br />
             <img
               src={Wordimg}
@@ -66,7 +68,7 @@ function Header(props: {
               height="30px"
               color="white"
             />
-            Words: {props.scoreWordCount}
+            Words: {props.score.wordCount}
           </div>
         </div>
       </div>

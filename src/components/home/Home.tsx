@@ -28,6 +28,7 @@ export const Home: FC<HomeProps> = ({ setgameDetails }) => {
           className="home__input"
           placeholder="Enter Your Name"
           onChange={(e) => setName(e.target.value)}
+          autoFocus
         />
         <select
           className="home__select"
