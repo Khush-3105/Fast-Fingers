@@ -128,9 +128,10 @@ button[disabled] {
 
 @media (max-width: 640px) {
   .game__wrapper {
-    height: calc(100% - 154px);
+    display: block;
+    padding: 15px;
+    height: calc(100% - 156px);
     overflow-y: auto;
-    flex-direction: column;
     gap: 0px;
   }
 }

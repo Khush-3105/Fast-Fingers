@@ -51,10 +51,10 @@ function useGame({ difficulty, userInput, setUserInput }: GameHookProps) {
   }, [userInput]);
 
   function gameRestart() {
-    setScore({ time: 0, wordCount: 0 });
     setGameNum(gameNum + 1);
     setIsGameActive(true);
     newWord();
+    setScore({ time: 0, wordCount: 0 });
   }
 
   function newWord() {
