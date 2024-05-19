@@ -15,7 +15,7 @@ function Header(props: {
 }) {
   return (
     <>
-      <div className="game__header">
+      <div className="header">
         <div>
           <img
             src={LogoImg}
@@ -26,7 +26,7 @@ function Header(props: {
           />
           Fast Fingers
         </div>
-        <div id="game__header__userdetails">
+        <div id="header__userdetails">
           <div className="headerbox">
             <img
               src={Userimg}

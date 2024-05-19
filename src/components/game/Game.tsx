@@ -59,21 +59,24 @@ export const Game: FC<GameProps> = ({ gameDetails, setgameDetails }) => {
               );
             })}
           </div>
-          <input
-            className="game__input"
-            type="text"
-            value={userInput}
-            disabled={!isGameActive}
-            onChange={(e) => setUserInput(e.target.value)}
-            autoFocus
-          />
-          <button
-            className="game__button"
-            disabled={isGameActive}
-            onClick={gameRestart}
-          >
-            Play Again
-          </button>
+          {isGameActive ? (
+            <input
+              className="game__input"
+              type="text"
+              value={userInput}
+              disabled={!isGameActive}
+              onChange={(e) => setUserInput(e.target.value)}
+              autoFocus
+            />
+          ) : (
+            <button
+              className="game__button"
+              disabled={isGameActive}
+              onClick={gameRestart}
+            >
+              Play Again
+            </button>
+          )}
           <button
             className="game__button"
             onClick={() => {

@@ -71,6 +71,7 @@
   font-family: "Arial", sans-serif;
   font-weight: 900;
   display: flex;
+  margin-bottom: 20px;
 }
 
 .word__letter {
@@ -89,6 +90,7 @@
   height: 40px;
   width: 300px;
   margin: 20px;
+  margin-top: 0;
   border-radius: 10px;
   border: none;
   color: black;
@@ -107,7 +109,7 @@
   border-radius: 10px;
   font-size: 20px;
   font-weight: bold;
-  margin: 5px;
+  margin: 10px;
 }
 .game__button:hover {
   border: 2px solid white;
@@ -123,7 +125,7 @@ button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
-  pointer-events:none;
+  pointer-events: none;
 }
 
 @media (max-width: 640px) {
@@ -132,6 +134,5 @@ button[disabled] {
     padding: 15px;
     height: calc(100% - 156px);
     overflow-y: auto;
-    gap: 0px;
   }
 }
