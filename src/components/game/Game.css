@@ -120,14 +120,6 @@
   transform: scale(0.9);
 }
 
-.game__button:disabled,
-button[disabled] {
-  border: 1px solid #999999;
-  background-color: #cccccc;
-  color: #666666;
-  pointer-events: none;
-}
-
 @media (max-width: 640px) {
   .game__wrapper {
     display: block;

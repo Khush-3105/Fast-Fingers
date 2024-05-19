@@ -64,16 +64,11 @@ export const Game: FC<GameProps> = ({ gameDetails, setgameDetails }) => {
               className="game__input"
               type="text"
               value={userInput}
-              disabled={!isGameActive}
               onChange={(e) => setUserInput(e.target.value)}
               autoFocus
             />
           ) : (
-            <button
-              className="game__button"
-              disabled={isGameActive}
-              onClick={gameRestart}
-            >
+            <button className="game__button" onClick={gameRestart}>
               Play Again
             </button>
           )}
